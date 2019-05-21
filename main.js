@@ -1,6 +1,6 @@
 var BDF = {
     type: Phaser.AUTO,
-    width: 800,
+    width: 600,
     height: 600,
     physics: {
         default: 'arcade',
@@ -16,6 +16,7 @@ var BDF = {
     }
 };
 
+//#region Variables
 var game = new Phaser.Game(BDF);
 var score = 0;
 var scoreText;
@@ -26,6 +27,8 @@ var MouseClick;
 var feathers = null;
 var feathers2 = null;
 var feathers3 = null;
+//#endregion Variables
+
 function preload() {
     this.load.image('background', './assets/sky.png');
     this.load.image('ground', './assets/platform.png');
@@ -34,14 +37,27 @@ function preload() {
     this.load.image('feather', './assets/feather.png');
     this.load.image('feather2', './assets/feather_2.png');
     this.load.image('feather3', './assets/feather_3.png');
+
+    this.load.bitmapFont('BDFFont', './assets/font/font.png', './assets/font/font.fnt');
+
 }
 
 function create() {
+    //#region Misc
+
     this.input.mouse.disableContextMenu();
+
+    //#endregion Misc
+   
     //#region Images Loading
     this.add.image(400, 300, 'background');
     //#endregion
-
+    
+    //#region Text
+ scoreText = this.add.bitmapText(15, 15, 'BDFFont', 'Score: 0', 20);
+ this.add.bitmapText(280, 5, 'BDFFont', 'Bird, Don\'t Fall!', 45);
+ //#endregion Text
+    
     //#region Feather Particles
     feathers = this.add.particles('feather').createEmitter({
         angle: { min: 0, max: 180 },
@@ -87,10 +103,9 @@ function create() {
     bird = this.physics.add.group();
 
     bird = this.physics.add.sprite(Phaser.Math.Between(0, 800), 10, 'bird');
-
+    bird.setScale(0.7);
     this.physics.add.collider(bird, platforms, PlatformTouch, null, this);
     this.physics.add.collider(bird, ground, BirdFell, null, this);
-
 
     bird.setBounce(1);
     bird.setCollideWorldBounds(true);
@@ -112,9 +127,7 @@ function create() {
     }, this);
     //#endregion
 
-    //#region Score
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '24px', fill: '#ffffff' });
-    //#endregion Score
+   
 }
 
 function update() {
@@ -156,7 +169,7 @@ function PlatformTouch() {
         );
        
         score += 10;
-        scoreText.setText('score: ' + score);
+        scoreText.setText('Score: ' + score);
 
 
     })
