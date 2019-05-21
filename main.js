@@ -17,6 +17,7 @@ var BDF = {
 };
 
 var game = new Phaser.Game(BDF);
+
 var score = 0;
 var scoreText;
 
@@ -28,12 +29,12 @@ var MouseClick;
 function preload() {
     this.load.image('sky', './assets/sky.png');
     this.load.image('ground', './assets/platform.png');
-    this.load.image('bomb', './assets/bomb.png');
+    this.load.image('bird', './assets/bird.png');
 
 }
 
-
 function create() {
+    this.input.mouse.disableContextMenu();
     //#region Images Loading
     this.add.image(400, 300, 'sky');
     //#endregion
@@ -51,9 +52,9 @@ function create() {
 
     //#region Bird 
     bird = this.physics.add.group();
-
-    bird = this.physics.add.sprite(300, 10, 'bomb');
-
+    
+    bird = this.physics.add.sprite(Phaser.Math.Between(0, 800), 10, 'bird');
+    bird.setTint(0x680000);
     this.physics.add.collider(bird, platforms, PlatformTouch, null, this);
     this.physics.add.collider(bird, ground, BirdFell, null, this);
 
@@ -66,14 +67,24 @@ function create() {
 
     //#region Create Platforms On Click
     this.input.on('pointerdown', function(pointer) {
-        if (platforms.countActive(true) == 0)
-            platforms.create(pointer.x, pointer.y, 'ground').setScale(0.2).refreshBody();
+        if(pointer.leftButtonDown()){   
+            if (platforms.countActive(true) == 0)
+                platforms.create(pointer.x, pointer.y, 'ground').setScale(0.2).refreshBody();
+        }
+        if(pointer.rightButtonDown()){   
+            if ((score) - 100 >= 0)
+            {
+             
+            }
+         console.log("right");
+        }
     }, this);
     //#endregion
 
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    //#region Score
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '24px', fill: '#ffffff' });
+    //#endregion Score
 }
-
 
 function update() {
 
@@ -99,10 +110,12 @@ function PlatformTouch() {
         bird.setCollideWorldBounds(true);
         bird.setVelocity(
             Phaser.Math.Between(-60 * (score / 10), 60 * (score / 10)),
-            Phaser.Math.Between(-50 * (score / 10), -100 * (score / 10))
+            Phaser.Math.Between(-50 * (score / 10), -60 * (score / 10))
         );
 
         score += 10;
         scoreText.setText('Score: ' + score);
+
+      
     })
 }
