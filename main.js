@@ -52,9 +52,9 @@ function create() {
 
     //#region Bird 
     bird = this.physics.add.group();
-    
+
     bird = this.physics.add.sprite(Phaser.Math.Between(0, 800), 10, 'bird');
-    bird.setTint(0x680000);
+
     this.physics.add.collider(bird, platforms, PlatformTouch, null, this);
     this.physics.add.collider(bird, ground, BirdFell, null, this);
 
@@ -67,16 +67,15 @@ function create() {
 
     //#region Create Platforms On Click
     this.input.on('pointerdown', function(pointer) {
-        if(pointer.leftButtonDown()){   
+        if (pointer.leftButtonDown()) {
             if (platforms.countActive(true) == 0)
                 platforms.create(pointer.x, pointer.y, 'ground').setScale(0.2).refreshBody();
         }
-        if(pointer.rightButtonDown()){   
-            if ((score) - 100 >= 0)
-            {
-             
+        if (pointer.rightButtonDown()) {
+            if ((score) - 100 >= 0) {
+
             }
-         console.log("right");
+            console.log("right");
         }
     }, this);
     //#endregion
@@ -116,6 +115,6 @@ function PlatformTouch() {
         score += 10;
         scoreText.setText('Score: ' + score);
 
-      
+
     })
 }
