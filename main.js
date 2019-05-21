@@ -96,22 +96,28 @@ function update() {
 
 }
 
-function BirdFell() {
+function BirdFell(game) {
     this.physics.pause();
     gameOver = true;
 }
 
-function PlatformTouch() {
+function PlatformTouch(game) {
     platforms.children.iterate(function(child) {
         child.destroy();
+        
+        var jumpHeight = (score > 50 ? score : 60);
 
         bird.setBounce(1);
         bird.setCollideWorldBounds(true);
         bird.setVelocity(
-            Phaser.Math.Between(-60 * (score / 10), 60 * (score / 10)),
-            Phaser.Math.Between(-50 * (score / 10), -60 * (score / 10))
+            //left-right
+            Phaser.Math.Between(-60 * (score / 10),
+                                 60 * (score / 10)),
+            //up-down
+            Phaser.Math.Between(-50 * (jumpHeight / 10),
+                                 -60 * (jumpHeight / 10))
         );
-
+       
         score += 10;
         scoreText.setText('Score: ' + score);
 
