@@ -5,7 +5,7 @@ var BDF = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
+            gravity: { y: 600 },
             debug: false
         }
     },
@@ -88,9 +88,7 @@ function update() {
 
 function BirdFell() {
     this.physics.pause();
-
     gameOver = true;
-    console.log(gameOver);
 }
 
 function PlatformTouch() {
@@ -99,7 +97,10 @@ function PlatformTouch() {
 
         bird.setBounce(1);
         bird.setCollideWorldBounds(true);
-        bird.setVelocity(Phaser.Math.Between(-400, 400), Phaser.Math.Between(-(score * 10), -(score * 11)));
+        bird.setVelocity(
+            Phaser.Math.Between(-60 * (score / 10), 60 * (score / 10)),
+            Phaser.Math.Between(-50 * (score / 10), -100 * (score / 10))
+        );
 
         score += 10;
         scoreText.setText('Score: ' + score);
