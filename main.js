@@ -17,28 +17,63 @@ var BDF = {
 };
 
 var game = new Phaser.Game(BDF);
-
 var score = 0;
 var scoreText;
-
 var bird;
 var platforms;
 var gameOver = false;
 var MouseClick;
-
+var feathers = null;
+var feathers2 = null;
+var feathers3 = null;
 function preload() {
-    this.load.image('sky', './assets/sky.png');
+    this.load.image('background', './assets/sky.png');
     this.load.image('ground', './assets/platform.png');
+    this.load.image('platform', './assets/platform.png');
     this.load.image('bird', './assets/bird.png');
-
+    this.load.image('feather', './assets/feather.png');
+    this.load.image('feather2', './assets/feather_2.png');
+    this.load.image('feather3', './assets/feather_3.png');
 }
 
 function create() {
     this.input.mouse.disableContextMenu();
     //#region Images Loading
-    this.add.image(400, 300, 'sky');
+    this.add.image(400, 300, 'background');
     //#endregion
 
+    //#region Feather Particles
+    feathers = this.add.particles('feather').createEmitter({
+        angle: { min: 0, max: 180 },
+        speed: { min: 200, max: 300 },
+        quantity:  Phaser.Math.Between(1, 4),
+        lifespan: 500,
+        scale: { start: 0.2, end: 0 },
+        on: false
+    });
+    feathers.reserve(1000);
+
+    feathers2 = this.add.particles('feather2').createEmitter({
+    angle: { min: 0, max: 180 },
+    speed: { min: 200, max: 300 },
+    quantity:  Phaser.Math.Between(1, 4),
+    lifespan: 500,
+    scale: { start: 0.2, end: 0 },
+    on: false
+    });
+    feathers2.reserve(1000);
+
+    feathers3 = this.add.particles('feather3').createEmitter({
+    angle: { min: 0, max: 180 },
+    speed: { min: 200, max: 300 },
+    quantity:  Phaser.Math.Between(1, 4),
+    lifespan: 500,
+    scale: { start: 0.2, end: 0 },
+    on: false
+    });
+    feathers3.reserve(1000);
+    //#endregion Feather Particles
+    
     //#region Ground
     ground = this.physics.add.staticGroup();
     ground.create(400, 620, 'ground').setScale(2).refreshBody();
@@ -46,8 +81,6 @@ function create() {
 
     //#region Jumping Platform
     platforms = this.physics.add.staticGroup();
-
-
     //#endregion Jumping Platform
 
     //#region Bird 
@@ -64,12 +97,11 @@ function create() {
     bird.setVelocity(Phaser.Math.Between(-100, 100), 100);
     //#endregion Bird
 
-
     //#region Create Platforms On Click
     this.input.on('pointerdown', function(pointer) {
         if (pointer.leftButtonDown()) {
             if (platforms.countActive(true) == 0)
-                platforms.create(pointer.x, pointer.y, 'ground').setScale(0.2).refreshBody();
+                platforms.create(pointer.x, pointer.y, 'platform').setScale(0.2).refreshBody();
         }
         if (pointer.rightButtonDown()) {
             if ((score) - 100 >= 0) {
@@ -96,15 +128,20 @@ function update() {
 
 }
 
+
 function BirdFell(game) {
     this.physics.pause();
     gameOver = true;
 }
 
-function PlatformTouch(game) {
+function PlatformTouch() {
     platforms.children.iterate(function(child) {
-        child.destroy();
         
+        child.destroy();
+        feathers.emitParticleAt(bird.x, bird.y);
+        feathers2.emitParticleAt(bird.x, bird.y);
+        feathers3.emitParticleAt(bird.x, bird.y);
+        //feathers.destroy();
         var jumpHeight = (score > 50 ? score : 60);
 
         bird.setBounce(1);
@@ -119,7 +156,7 @@ function PlatformTouch(game) {
         );
        
         score += 10;
-        scoreText.setText('Score: ' + score);
+        scoreText.setText('score: ' + score);
 
 
     })
