@@ -1,26 +1,26 @@
 {
-  "name": "bird-dont-fall",
-  "version": "0.0.1",
-  "description": "Bird Don't Fall! HTML Game (Phaser 3 + JavaScript)",
-  "main": "main.js",
-  "scripts": {
-    "test": "echo \"Ey\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SgtBackpack/bird-dont-fall.git"
-  },
-  "keywords": [
-    "html",
-    "game",
-    "phaser3",
-    "javascript",
-    "arcade"
-  ],
-  "author": "Razvan Backpack Truta",
-  "license": "MPL-2.0",
-  "bugs": {
-    "url": "https://github.com/SgtBackpack/bird-dont-fall/issues"
-  },
-  "homepage": "https://github.com/SgtBackpack/bird-dont-fall#readme"
+    "name": "bird-dont-fall",
+    "version": "0.1.1-proto",
+    "description": "Bird Don't Fall! HTML Game (Phaser 3 + JavaScript)",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Ey\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SgtBackpack/bird-dont-fall.git"
+    },
+    "keywords": [
+        "html",
+        "game",
+        "phaser3",
+        "javascript",
+        "arcade"
+    ],
+    "author": "Razvan Backpack Truta",
+    "license": "MPL-2.0",
+    "bugs": {
+        "url": "https://github.com/SgtBackpack/bird-dont-fall/issues"
+    },
+    "homepage": "https://github.com/SgtBackpack/bird-dont-fall#readme"
 }
