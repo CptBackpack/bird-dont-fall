@@ -122,7 +122,8 @@ function create() {
 
     bird = this.physics.add.sprite(Phaser.Math.Between(0, 800), 10, 'bird');
     bird.setScale(0.7);
-
+    bird.setOrigin(0, 0);
+    bird.setSize(80, 75, false);
     this.physics.add.collider(bird, platforms, PlatformTouch, null, this);
     this.physics.add.collider(bird, ground, BirdFell, null, this);
 
@@ -200,9 +201,9 @@ function PlatformTouch() {
 
 
 
-        feathers.emitParticleAt(bird.x, bird.y);
-        feathers2.emitParticleAt(bird.x, bird.y);
-        feathers3.emitParticleAt(bird.x, bird.y);
+        feathers.emitParticleAt(bird.x+25, bird.y + 50);
+        feathers2.emitParticleAt(bird.x+25, bird.y + 50);
+        feathers3.emitParticleAt(bird.x+25, bird.y + 50);
         //feathers.destroy();
         var jumpHeight = (score > 60 ? score : (60 + score) * 1.2);
 

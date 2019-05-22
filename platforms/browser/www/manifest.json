@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "Bird, Don't Fall!",
+  "short_name": "Bird, Don't Fall!",
+  "version": "com.birddontfall.apk",
+  "description": "Bird, Don't Fall! is a game in which you have to take care of your pet parrot.",
+  "author": "Sgt.Backpack",
+  "icons": [],
+  "start_url": "index.html"
+}
