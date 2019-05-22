@@ -5,6 +5,7 @@ Your tools to do so are your hands. Place your hands where you would expect your
 ... but, there's a problem! The bird goes crazier and crazier, and will start jumping around more chaotic the more you keep it from the ground.
 Good luck!
 
+[Devlog, News, Updates & Changes](https://cptbackpack.itch.io/bird-dont-fall/devlog)
 [Bird, Don't Fall! on itch.io](https://cptbackpack.itch.io/bird-dont-fall)
 ## Development 
 The HTML5 game is still in development. 
