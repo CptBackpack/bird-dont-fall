@@ -1,8 +1,8 @@
 {
   "name": "com.birddontfall.apk",
   "displayName": "Bird, Don't Fall!",
-  "version": "1.0.0",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "version": "0.0.1-proto",
+  "description": "Bird, Don't Fall! is a game in which you have to take care of your pet parrot. ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,8 +10,8 @@
   "keywords": [
     "ecosystem:cordova"
   ],
-  "author": "Apache Cordova Team",
-  "license": "Apache-2.0",
+  "author": "Sgt Backpack",
+  "license": "MPL-2.0",
   "dependencies": {
     "browser-sync": "^2.26.5",
     "cheerio": "^0.19.0",
@@ -24,7 +24,8 @@
     "npm": "^2.15.12",
     "plist": "^1.2.0",
     "q": "^1.5.1",
-    "taco-livereload": "^1.0.4"
+    "taco-livereload": "^1.0.4",
+    "cordova-plugin-whitelist": "1"
   },
   "devDependencies": {
     "cordova-plugin-whitelist": "^1.3.3"
