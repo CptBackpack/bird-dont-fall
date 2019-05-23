@@ -1,3 +1,4 @@
+//#region Variables
 var BDF = {
     type: Phaser.CANVAS,
     scale: {
@@ -18,7 +19,6 @@ var BDF = {
     }
 };
 
-//#region Variables
 var game = new Phaser.Game(BDF);
 
 
@@ -191,7 +191,7 @@ function update() {
 
 }
 
-
+//#region Game Mechanics Functions
 function BirdFell(game) {
     //this.physics.pause();
 
@@ -225,7 +225,7 @@ function PlatformTouch() {
         absolutescore += 5 * ((combo > 0 ? combo : 1) / 10);
 
         if (combo == 0 && lives < 3) {
-            absolutescore = (10 * 7);
+            absolutescore = (10 * 3);
             console.log("HP Loss ABS:" + absolutescore);
         }
 
@@ -257,10 +257,11 @@ function PlatformTouch() {
 
     
 }
-
+//#endregion Game Mechanics Functions
 
 //#region Utility Functions
 function SetScoreText(score) {
+    score = Math.round(score);
     switch (true) {
         case (score < 0):
             progressText.setText(':(');
