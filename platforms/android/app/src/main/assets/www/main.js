@@ -20,17 +20,29 @@ var BDF = {
 
 //#region Variables
 var game = new Phaser.Game(BDF);
-var score = 0;
+
+
 var scoreText;
 var progressText;
+var comboText;
+var livesText;
+
 var bird;
 var platforms;
-var gameOver = false;
+
 var MouseClick;
+
 var feathers = null;
 var feathers2 = null;
 var feathers3 = null;
+
+var score = 0;
+var absolutescore = 0;
+var gameOver = false;
+var lives = 3;
+var combo = 0;
 //#endregion Variables
+
 
 function preload() {
     //#region Background
@@ -69,8 +81,11 @@ function create() {
     //#region Text
     scoreText = this.add.bitmapText(15, 15, 'BDFFont', 'Score: 0', 20);
     progressText = this.add.bitmapText(15, 40, 'BDFFont', '', 20);
+    livesText = this.add.bitmapText(15, 70, 'BDFFont', 'HP: 3', 20);
+    comboText = this.add.bitmapText(window.innerWidth - 130, 25, 'BDFFont', 'x0', 50);
+   
 
-    this.add.bitmapText(window.innerWidth - 200, 5, 'BDFFont', 'Bird, Don\'t Fall!', 25);
+    //.this.add.bitmapText(window.innerWidth - 200, 5, 'BDFFont', 'Bird, Don\'t Fall!', 25);
     //#endregion Text
 
     //#region Feather Particles
@@ -79,7 +94,7 @@ function create() {
         speed: { min: 200, max: 300 },
         quantity: Phaser.Math.Between(1, 4),
         lifespan: 500,
-        scale: { start: 0.2, end: 0 },
+        scale: { start: 0.15, end: 0 },
         on: false
     });
     feathers.reserve(1000);
@@ -89,7 +104,7 @@ function create() {
         speed: { min: 200, max: 300 },
         quantity: Phaser.Math.Between(1, 4),
         lifespan: 500,
-        scale: { start: 0.2, end: 0 },
+        scale: { start: 0.15, end: 0 },
         on: false
     });
     feathers2.reserve(1000);
@@ -99,7 +114,7 @@ function create() {
         speed: { min: 200, max: 300 },
         quantity: Phaser.Math.Between(1, 4),
         lifespan: 500,
-        scale: { start: 0.2, end: 0 },
+        scale: { start: 0.15, end: 0 },
         on: false
     });
     feathers3.reserve(1000);
@@ -122,7 +137,8 @@ function create() {
 
     bird = this.physics.add.sprite(Phaser.Math.Between(0, 800), 10, 'bird');
     bird.setScale(0.7);
-
+    bird.setOrigin(0, 0);
+    bird.setSize(80, 70, false);
     this.physics.add.collider(bird, platforms, PlatformTouch, null, this);
     this.physics.add.collider(bird, ground, BirdFell, null, this);
 
@@ -157,11 +173,19 @@ function create() {
 }
 
 function update() {
+    scoreText.setText('Score: ' + score);
+    comboText.setText('x' + combo);
+    livesText.setText('HP: ' + lives);
+    SetScoreText(score);
 
-    if (gameOver) {
+    if (lives == 0) {
         this.scene.restart();
         gameOver = false;
         score = 0;
+        absolutescore = 0;
+        lives = 3;
+        combo = 0;
+
     }
 
 
@@ -169,54 +193,93 @@ function update() {
 
 
 function BirdFell(game) {
-    this.physics.pause();
-    gameOver = true;
+    //this.physics.pause();
+
+    lives -= 1;
+    score -= (50 * (combo / 5));
+    combo = 0;
+    var jumpHeight = (score > 60 ? score : (60 + score) * 1.2);
+    platforms.children.iterate(function(child) {
+
+        child.destroy();
+    });
+    bird.setBounce(1);
+    bird.setCollideWorldBounds(true);
+    bird.setVelocity(
+        //left-right
+        Phaser.Math.Between(-10 + ((-1) * Math.abs(score) * 2.5), 10 + (Math.abs(score) * 2.5)),
+        //up-down
+        -900
+    );
+
+  
+
 }
 
 function PlatformTouch() {
     platforms.children.iterate(function(child) {
-
         child.destroy();
+    })
+    
+        score += 10 * ((combo > 0 ? combo : 1) / 10);
+        absolutescore += 5 * ((combo > 0 ? combo : 1) / 10);
 
-        score += 10;
-        scoreText.setText('Score: ' + score);
-        switch (true) {
-            case (score <= 100):
-                progressText.setText('easy mode');
-                break;
-            case (score > 100 && score < 200):
-                progressText.setText('not bad');
-                break;
-            case (score > 200 && score < 300):
-                progressText.setText('amazing');
-                break;
-            case (score > 300):
-                progressText.setText('mlg player');
-                break;
-            default:
-                break;
+        if (combo == 0 && lives < 3) {
+            absolutescore = (10 * 7);
+            console.log("HP Loss ABS:" + absolutescore);
         }
 
+        console.log("General ABS:" + absolutescore);
+        combo++;
+       
+        
 
+        //#region Spawn Feathers
+        feathers.emitParticleAt(bird.x + 25, bird.y + 50);
+        feathers2.emitParticleAt(bird.x + 25, bird.y + 50);
+        feathers3.emitParticleAt(bird.x + 25, bird.y + 50);
+        //#endregion Spawn Feathers
 
-
-        feathers.emitParticleAt(bird.x, bird.y);
-        feathers2.emitParticleAt(bird.x, bird.y);
-        feathers3.emitParticleAt(bird.x, bird.y);
-        //feathers.destroy();
-        var jumpHeight = (score > 60 ? score : (60 + score) * 1.2);
+        //#region Resolve jumping
+        var jumpHeight = (absolutescore > 70 ? absolutescore : (70 + Math.abs(absolutescore) * 1.2));
 
         bird.setBounce(1);
         bird.setCollideWorldBounds(true);
         bird.setVelocity(
             //left-right
-            Phaser.Math.Between(-10 + ((-1) * score * 2.5), 10 + (score * 2.5)),
+            Phaser.Math.Between(-10 + ((-1) * Math.abs(absolutescore) * 2.5), 10 + (Math.abs(absolutescore) * 2.5)),
             //up-down
             Phaser.Math.Between(-5 + ((-1) * jumpHeight * 2.5), -10 + ((-1) * jumpHeight * 2.5))
         );
+        //#endregion Resolve jumping
 
 
 
-
-    })
+    
 }
+
+
+//#region Utility Functions
+function SetScoreText(score) {
+    switch (true) {
+        case (score < 0):
+            progressText.setText(':(');
+            break;
+        case (score >= 0 && score < 100):
+            progressText.setText('easy mode');
+            break;
+        case (score > 100 && score < 200):
+            progressText.setText('not bad');
+            break;
+        case (score > 200 && score < 300):
+            progressText.setText('amazing');
+            break;
+        case (score > 300):
+            progressText.setText('mlg player');
+            break;
+        default:
+            break;
+    }
+
+}
+//#endregion Utility Functions
