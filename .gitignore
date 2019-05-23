@@ -15,3 +15,4 @@ www/engine/phaser.min.js
 www/index.html
 www/main.js
 www/package.json
+*.zip
