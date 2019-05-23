@@ -1,0 +1,17 @@
+
+platforms/browser/www/
+www/assets/feather_particles/feather.png
+www/assets/feather_particles/feather_2.png
+www/assets/feather_particles/feather_3.png
+www/assets/font/font.fnt
+www/assets/font/font.png
+www/assets/images/background.png
+www/assets/sprites/bird.png
+www/assets/sprites/ground.png
+www/assets/sprites/hand.png
+www/bdf_0.1.3-proto.zip
+www/engine/phaser.js
+www/engine/phaser.min.js
+www/index.html
+www/main.js
+www/package.json
