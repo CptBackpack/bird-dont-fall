@@ -8,7 +8,7 @@ Good luck!
 
 [Devlog, News, Updates & Changes](https://cptbackpack.itch.io/bird-dont-fall/devlog)      
 [Bird, Don't Fall! on itch.io](https://cptbackpack.itch.io/bird-dont-fall)  
-[Get the latest .apk for test build](http://bit.ly/bird-dont-fall-releases)
+[Get the latest .apk for test build](http://bit.ly/bird-dont-fall)
 ## Development 
 The HTML5 game is still in development. 
 The development is done using the [Phaser](https://github.com/photonstorm/phaser) game engine.
