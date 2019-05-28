@@ -178,11 +178,9 @@ update: function () {
 
 //#region Game Mechanics Functions
 BirdFell: function() {
-
     lives -= 1;
     score -= (Math.abs((score > 10 ? score : 10)/10) * (combo / 5));
     score = Math.round(score);
-   
     if(score < 0)
         score = 0;
     if(highestCombo < combo){
@@ -201,9 +199,6 @@ BirdFell: function() {
         //up-down
         -900
     );
-
-  
-
 },
 
 PlatformTouch: function(){
