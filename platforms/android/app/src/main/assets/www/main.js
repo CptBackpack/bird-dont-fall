@@ -18,9 +18,19 @@ var BDFGameSettings = {
             debug: false
         }
     },
-    scene: [MainMenu, GameScene]
+    scene: [MainMenu, GameScene, GameOver]
    
 };
 
+//#region Global Variables
+var gamename = 'Bird, Don\'t Fall!';
+var version = '0.4.3-proto';
 
+var combo = 0;
+var highestCombo = 0;
+var score = 0;
+
+var latestScore = 0;
+var highScore = 0;
+//#endregion Global Variables
 var game = new Phaser.Game(BDFGameSettings);
