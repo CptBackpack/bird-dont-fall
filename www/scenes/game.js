@@ -13,11 +13,11 @@
  var feathers2 = null;
  var feathers3 = null;
 
- var score = 0;
+
  var absolutescore = 0;
  var gameOver = false;
- var lives = 3;
- var combo = 0;
+ var lives = 0;
+
  //#endregion Variables
 
 var GameScene = new Phaser.Class({
@@ -30,6 +30,8 @@ var GameScene = new Phaser.Class({
     },
 
 preload :function() {
+    lives = 3;
+    score = 0;
     //#region Background
     this.load.image('background', './assets/images/background.png');
     //#endregion Background
@@ -160,15 +162,18 @@ create: function() {
 },
 
 update: function () {
+
+    if (lives == 0) {
+        this.scene.start('gameover');
+
+    }
+
     scoreText.setText('Score: ' + score);
     comboText.setText('x' + combo);
     livesText.setText('HP: ' + lives);
     this.SetScoreText(score);
    
-    if (lives == 0) {
-        this.scene.start('mainmenu');
-
-    }
+   
 
 
 },
@@ -177,8 +182,17 @@ update: function () {
 BirdFell: function() {
     //this.physics.pause();
 
+    if(lives > 0){
+      
+        latestScore = score;
+        //console.log(latestScore);
+    }
+    
     lives -= 1;
     score -= (50 * (combo / 5));
+    if(highestCombo < combo){
+        highestCombo = combo;
+    }
     combo = 0;
     platforms.children.iterate(function(child) {
 
