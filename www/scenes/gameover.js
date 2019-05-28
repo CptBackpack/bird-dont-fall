@@ -35,7 +35,7 @@ var GameOver = new Phaser.Class({
 		//#region Feather Particles
 		feathers = this.add.particles('feather').createEmitter({
 			x: window.innerWidth - 100,
-			y: 160,
+			y: window.innerHeight/4 + 30,
 			angle: { min: 0, max: 180 },
 			speed: { min: 50, max: 150 },
 			quantity: Phaser.Math.Between(1, 4),
@@ -48,7 +48,7 @@ var GameOver = new Phaser.Class({
 
 		feathers2 = this.add.particles('feather2').createEmitter({
 			x: window.innerWidth - 100,
-			y: 160,
+			y: window.innerHeight/4 + 30,
 			angle: { min: 0, max: 180 },
 			speed: { min: 200, max: 300 },
 			quantity: Phaser.Math.Between(1, 4),
@@ -61,7 +61,7 @@ var GameOver = new Phaser.Class({
 
 		feathers3 = this.add.particles('feather3').createEmitter({
 			x: window.innerWidth - 100,
-			y: 160,
+			y: window.innerHeight/4 + 30,
 			angle: { min: 0, max: 180 },
 			speed: { min: 200, max: 300 },
 			quantity: Phaser.Math.Between(1, 4),
@@ -73,8 +73,8 @@ var GameOver = new Phaser.Class({
 		feathers3.reserve(1000);
 		//#endregion Feather Particles
 		
-		bird = this.add.sprite(window.innerWidth - 100, 95, 'bird');
-		hand = this.add.sprite(window.innerWidth - 115, 125, 'hand');
+		bird = this.add.sprite(window.innerWidth - 100, window.innerHeight/4 - 30, 'bird');
+		hand = this.add.sprite(window.innerWidth - 115, window.innerHeight/4, 'hand');
 		hand.setScale(0.3);
 
 		
@@ -91,9 +91,9 @@ var GameOver = new Phaser.Class({
 		this.add.bitmapText(15, 15, 'BDFFont', gamename, 50);
 		this.add.bitmapText(15, window.innerHeight - 50, 'BDFFont', version, 20);
 
-		this.add.bitmapText(188, 150, 'BDFFont', 'Score: ' + latestScore, 20);
-		this.add.bitmapText(100, 175, 'BDFFont', 'Highest Combo: ' + highestCombo, 20);
-		this.add.bitmapText(140, 200, 'BDFFont', 'Final Score: ' + (latestScore > 0 ? latestScore : 0) * highestCombo, 20);
+		this.add.bitmapText(188, window.innerHeight/3, 'BDFFont', 'Score: ' + latestScore, 20);
+		this.add.bitmapText(100, window.innerHeight/3 + 20, 'BDFFont', 'Highest Combo: ' + highestCombo, 20);
+		this.add.bitmapText(140, window.innerHeight/3 + 40, 'BDFFont', 'Final Score: ' + (latestScore > 0 ? latestScore : 0) * highestCombo, 20);
 		console.log((score > 0 ? score : 'is zero'));
 
 		// add tutorial and start button
