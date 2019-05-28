@@ -164,6 +164,7 @@ create: function() {
 update: function () {
 
     if (lives == 0) {
+        latestScore = score;
         this.scene.start('gameover');
 
     }
@@ -173,23 +174,17 @@ update: function () {
     livesText.setText('HP: ' + lives);
     this.SetScoreText(score);
    
-   
-
-
 },
 
 //#region Game Mechanics Functions
 BirdFell: function() {
-    //this.physics.pause();
 
-    if(lives > 0){
-      
-        latestScore = score;
-        //console.log(latestScore);
-    }
-    
     lives -= 1;
-    score -= (50 * (combo / 5));
+    score -= (Math.abs((score > 10 ? score : 10)/10) * (combo / 5));
+    score = Math.round(score);
+   
+    if(score < 0)
+        score = 0;
     if(highestCombo < combo){
         highestCombo = combo;
     }
