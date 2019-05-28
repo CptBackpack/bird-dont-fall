@@ -1,5 +1,5 @@
 
-# Bird, Don't Fall! [![Build status](https://ci.appveyor.com/api/projects/status/v1y8higridsew3c7?svg=true)](https://ci.appveyor.com/project/SgtBackpack/bird-dont-fall)
+# Bird, Don't Fall!
 
 **Bird, Don't Fall!** is a browser/mobile game in which you have to take care of your pet parrot.  
 >Your bird just got his wings trimmed, and because of that he cannot fly that good anymore. That made him angry, and now he tries to jump in attempt to fly. Your job is to keep it safe and not allow him to touch the ground.
