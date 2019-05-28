@@ -88,8 +88,9 @@ var MainMenu = new Phaser.Class({
 		feathers2.start();
 		feathers3.start();
 
-		this.add.bitmapText(15, 15, 'BDFFont', 'Bird, Don\'t Fall!', 50);
-		this.add.bitmapText(15, window.innerHeight - 50, 'BDFFont', 'v: 0.3.3-proto', 20);
+
+		this.add.bitmapText(15, 15, 'BDFFont', gamename, 50);
+		this.add.bitmapText(15, window.innerHeight - 50, 'BDFFont', version, 20);
 
 
 

@@ -23,6 +23,9 @@ var BDFGameSettings = {
 };
 
 //#region Global Variables
+var gamename = 'Bird, Don\'t Fall!';
+var version = '0.3.3-proto';
+
 var combo = 0;
 var highestCombo = 0;
 var score = 0;
