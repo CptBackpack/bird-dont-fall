@@ -15,4 +15,4 @@ The HTML5 game is still in development.
 The development is done using the [Phaser](https://github.com/photonstorm/phaser) game engine.
 
 ## Contact the developer
-On [Facebook](https://www.facebook.com/truta.r96), or on [Twitter @rvBackpack](https://twitter.com/rvbackpack)
+On [Facebook](https://www.facebook.com/truta.r96), or on [Twitter @razvanbackpack](https://twitter.com/razvanbackpack)
